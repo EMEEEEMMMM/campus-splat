@@ -1,13 +1,36 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     />
-    <meta name="theme-color" content="#0f172a" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f2f5f6" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b1418" />
     <title>校园 3DGS 采集</title>
+    <script>
+      // Pick the theme before the first paint so a dark system never flashes light.
+      // Stored preference wins; otherwise follow the OS and keep following it.
+      ;(function () {
+        var root = document.documentElement
+        function apply(dark) {
+          root.setAttribute('data-theme', dark ? 'dark' : 'light')
+        }
+        try {
+          var stored = localStorage.getItem('threedgs.theme')
+          var media = window.matchMedia('(prefers-color-scheme: dark)')
+          apply(stored ? stored === 'dark' : media.matches)
+          if (!stored && media.addEventListener) {
+            media.addEventListener('change', function (event) {
+              apply(event.matches)
+            })
+          }
+        } catch (error) {
+          apply(false)
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

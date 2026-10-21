@@ -1,4 +1,5 @@
 import { useI18n } from '../i18n'
+import { Icon } from './Icon'
 
 /**
  * Default shooting tips for the volunteer checkpoint page.
@@ -43,7 +44,7 @@ export function ShootingTips() {
 
   return (
     <div className="shot-guide shot-tips">
-      <h3>📐 {t('tips.title')}</h3>
+      <h3><Icon name="camera" size={17} /> {t('tips.title')}</h3>
       <ul className="tip-list">
         {tips.map((tip) => (
           <li key={tip.title} className="tip-item">

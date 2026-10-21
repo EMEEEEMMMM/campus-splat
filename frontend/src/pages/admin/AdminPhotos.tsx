@@ -13,6 +13,7 @@ import {
   statusTone,
   useAsync,
 } from '../../components/common'
+import { Icon } from '../../components/Icon'
 import { issueLabel, useI18n } from '../../i18n'
 import type { Photo, PhotoStatus, ReviewStatus } from '../../types'
 
@@ -268,7 +269,7 @@ export default function AdminPhotos() {
                   window.setTimeout(() => setToast(null), 4000)
                 }}
               >
-                📂 {t('admin.photos.reveal')}
+                <Icon name="folder" size={15} /> {t('admin.photos.reveal')}
               </button>
               <button
                 type="button"

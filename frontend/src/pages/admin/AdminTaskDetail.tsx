@@ -17,6 +17,7 @@ import {
   usePolling,
   useTimeFormat,
 } from '../../components/common'
+import { Icon } from '../../components/Icon'
 import { useI18n } from '../../i18n'
 import type { CheckpointProgress, Photo } from '../../types'
 
@@ -235,7 +236,7 @@ export default function AdminTaskDetail() {
               window.setTimeout(() => setToast(null), 4000)
             }}
           >
-            📂 {t('admin.tasks.openFolder')}
+            <Icon name="folder" size={15} /> {t('admin.tasks.openFolder')}
           </button>
         </div>
       </div>

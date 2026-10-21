@@ -97,7 +97,7 @@ export default function VolunteerBoard() {
                   {card.review_status === 'returned' ? (
                     <Badge tone="bad">{t('volunteer.board.returned')}</Badge>
                   ) : (
-                    <Badge tone="warn">{t('volunteer.board.continue')}</Badge>
+                    <Badge tone="warn">{t('status.in_progress')}</Badge>
                   )}
                 </div>
                 <h2 style={{ marginTop: 10 }}>{card.checkpoint.name}</h2>
@@ -140,7 +140,7 @@ export default function VolunteerBoard() {
                 {card.claimed_by_someone_else ? (
                   <Badge tone="neutral">{t('volunteer.board.byOther')}</Badge>
                 ) : (
-                  <Badge tone="ok">{card.checkpoint.name}</Badge>
+                  <Badge tone="ok">{t('volunteer.board.idle')}</Badge>
                 )}
               </div>
               <h2 style={{ marginTop: 10 }}>{card.checkpoint.name}</h2>

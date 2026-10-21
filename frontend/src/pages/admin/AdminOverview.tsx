@@ -45,7 +45,7 @@ export default function AdminOverview() {
         </button>
       </div>
 
-      <div className="grid cols-4" style={{ marginBottom: 18 }}>
+      <div className="metric-band" style={{ marginBottom: 18 }}>
         <Metric label={t('admin.overview.tasks')} value={totals.tasks} />
         <Metric
           label={t('admin.overview.photos')}
@@ -81,7 +81,7 @@ export default function AdminOverview() {
             tone={
               (storage.total_bytes - storage.free_bytes) / Math.max(1, storage.total_bytes) > 0.9
                 ? 'bad'
-                : 'warn'
+                : 'brand'
             }
           />
           <p className="small muted" style={{ marginTop: 10, marginBottom: 0 }}>

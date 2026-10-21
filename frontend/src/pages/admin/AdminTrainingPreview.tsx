@@ -4,6 +4,7 @@ import * as THREE from 'three'
 import { SceneFormat, Viewer } from '@mkkellogg/gaussian-splats-3d'
 import { api } from '../../api'
 import { Badge, ErrorBox, Spinner, formatBytes, statusTone, useAsync } from '../../components/common'
+import { Icon } from '../../components/Icon'
 import { useI18n } from '../../i18n'
 import type { Placement, PlacementUpdate } from '../../types'
 
@@ -454,7 +455,7 @@ export default function AdminTrainingPreview() {
             title={t('admin.preview.editHint')}
             onClick={() => setEditMode((value) => !value)}
           >
-            ✥ {editMode ? t('admin.preview.editExit') : t('admin.preview.editEnter')}
+            <Icon name="move" size={15} /> {editMode ? t('admin.preview.editExit') : t('admin.preview.editEnter')}
           </button>
         </div>
         <span className="small muted">
@@ -568,7 +569,7 @@ export default function AdminTrainingPreview() {
                       {scene.transform_source === 'manual' ? (
                         <span className="ok-text" title={t('admin.preview.placed')}>
                           {' '}
-                          ✓
+                          <Icon name="check" size={13} />
                         </span>
                       ) : null}
                       {placementsEqual(placements[scene.key], savedPlacements[scene.key]) ? null : (

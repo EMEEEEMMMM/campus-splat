@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../auth'
 import { ErrorBox, LanguageSwitcher } from '../../components/common'
+import { BrandMark } from '../../components/Icon'
 import { useI18n } from '../../i18n'
 
 // The three fixed administrators. Which one you are decides what you may do:
@@ -38,7 +39,11 @@ export default function AdminLogin() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <div className="row" style={{ justifyContent: 'flex-end', marginBottom: 6 }}>
+        <div className="row between" style={{ marginBottom: 20 }}>
+          <div className="auth-brand" style={{ marginBottom: 0 }}>
+            <BrandMark size={26} />
+            {t('app.name')}
+          </div>
           <LanguageSwitcher compact />
         </div>
 

@@ -14,6 +14,7 @@ import {
   useTimeFormat,
   usePolling,
 } from '../../components/common'
+import { Icon } from '../../components/Icon'
 import { useI18n } from '../../i18n'
 
 interface FormState {
@@ -91,7 +92,7 @@ export default function AdminTasks() {
           <div className="sub">{t('admin.tasks.subtitle')}</div>
         </div>
         <button type="button" className="btn btn-primary" onClick={() => setOpen(true)}>
-          + {t('admin.tasks.new')}
+          <Icon name="plus" size={15} /> {t('admin.tasks.new')}
         </button>
       </div>
 

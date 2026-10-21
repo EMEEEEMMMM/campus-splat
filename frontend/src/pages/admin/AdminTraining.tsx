@@ -16,6 +16,7 @@ import {
   usePolling,
   useTimeFormat,
 } from '../../components/common'
+import { Icon } from '../../components/Icon'
 import { useI18n } from '../../i18n'
 import type { TrainingBlock, TrainingParams, TrainingRun } from '../../types'
 
@@ -407,7 +408,7 @@ export default function AdminTraining() {
             disabled={busy || !selectedTask || !preflight || preflight.blocks.length === 0}
             onClick={() => void start()}
           >
-            🚀 {busy ? t('common.loading') : t('admin.training.start')}
+            <Icon name="play" size={15} /> {busy ? t('common.loading') : t('admin.training.start')}
           </button>
         </Card>
 
@@ -625,7 +626,7 @@ function RunCard({
         </button>
         {hasPly && (
           <Link className="btn btn-ghost sm" to={`/admin/training/${run.id}/preview`}>
-            🧊 {t('admin.training.openPreview')}
+            <Icon name="cube" size={15} /> {t('admin.training.openPreview')}
           </Link>
         )}
         <button type="button" className="btn btn-ghost sm" onClick={onLog}>
@@ -638,7 +639,7 @@ function RunCard({
         ) : null}
         {run.status !== 'running' ? (
           <button type="button" className="btn btn-ghost sm" onClick={onDelete}>
-            🗑 {t('common.delete')}
+            <Icon name="trash" size={15} /> {t('common.delete')}
           </button>
         ) : null}
         {run.output_path && <span className="small muted mono">{run.output_path}</span>}
@@ -734,7 +735,7 @@ function RunDetail({
                       className="btn btn-ghost sm"
                       onClick={() => void retry(block)}
                     >
-                      ♻ {t('admin.training.retryBlock')}
+                      <Icon name="retry" size={14} /> {t('admin.training.retryBlock')}
                     </button>
                   ) : null}
                 </div>
@@ -754,7 +755,7 @@ function RunDetail({
           {data.artifacts?.map((artifact) => (
             <li key={artifact.path} className="row between" style={{ gap: 8 }}>
               <span>
-                {artifact.kind === 'ply' ? '🧊' : '📄'}{' '}
+                {artifact.kind === 'ply' ? <Icon name="cube" size={14} /> : <Icon name="file" size={14} />}{' '}
                 {artifact.kind === 'transform'
                   ? t('admin.training.artifactTransform')
                   : artifact.kind === 'manifest'

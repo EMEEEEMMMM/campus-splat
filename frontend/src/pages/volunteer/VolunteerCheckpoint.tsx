@@ -4,6 +4,7 @@ import { api } from '../../api'
 import { Badge, ErrorBox, ProgressBar, Spinner, formatDateTime, useAsync } from '../../components/common'
 import { clearDraft, readDraft, writeDraft } from '../../drafts'
 import { ShootingTips } from '../../components/ShotGuide'
+import { Icon } from '../../components/Icon'
 import { issueLabel, useI18n } from '../../i18n'
 import type { CheckpointProgress, UploadBatch, UploadResult } from '../../types'
 
@@ -159,7 +160,7 @@ export default function VolunteerCheckpoint() {
           onClick={() => navigate('/v')}
           aria-label={t('common.back')}
         >
-          ←
+          <Icon name="arrowLeft" size={15} />
         </button>
         <div className="title">
           <h1>{cp.name}</h1>
@@ -173,8 +174,23 @@ export default function VolunteerCheckpoint() {
         </Badge>
       </header>
 
-      {/* 审核状态 + 交卷：一次一个点位，交完就能接下一个 */}
-      <div className="vol-body" style={{ paddingBottom: 0 }}>
+      <div className="vol-body">
+        <div className="card">
+          <div className="row between" style={{ marginBottom: 8 }}>
+            <strong>{t('cp.uploaded', { usable: cp.uploaded_usable, count: cp.shot_count })}</strong>
+            <span className={cp.remaining > 0 ? 'badge badge-warn' : 'badge badge-ok'}>
+              {cp.remaining > 0 ? t('cp.remaining', { count: cp.remaining }) : t('cp.enough')}
+            </span>
+          </div>
+          <ProgressBar value={percentDone} height={10} />
+          {pendingIds.length > 0 && (
+            <p className="small muted" style={{ marginBottom: 0, marginTop: 8 }}>
+              ⏳ {t('cp.checkingCount', { count: pendingIds.length })}
+            </p>
+          )}
+        </div>
+
+        {/* 审核状态 + 交卷：一次一个点位，交完就能接下一个 */}
         <div className="card">
           {data.review.status === 'returned' ? (
             <p className="workflow-note">
@@ -197,38 +213,27 @@ export default function VolunteerCheckpoint() {
             </p>
           ) : null}
           {data.held_by_me && data.review.status !== 'submitted' ? (
-            <button
-              type="button"
-              className="btn btn-primary block"
-              disabled={submitting || cp.uploaded_usable === 0}
-              onClick={() => void handIn()}
-            >
-              {t('volunteer.board.submit')}
-            </button>
+            cp.uploaded_usable === 0 ? (
+              <p className="small muted" style={{ margin: 0 }}>
+                {t('volunteer.board.noPhotosYet')}
+              </p>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-primary block"
+                disabled={submitting}
+                onClick={() => void handIn()}
+              >
+                {t('volunteer.board.submit')}
+              </button>
+            )
           ) : null}
           {notice ? <p role="status">{notice}</p> : null}
-        </div>
-      </div>
-
-      <div className="vol-body">
-        <div className="card">
-          <div className="row between" style={{ marginBottom: 8 }}>
-            <strong>{t('cp.uploaded', { usable: cp.uploaded_usable, count: cp.shot_count })}</strong>
-            <span className={cp.remaining > 0 ? 'badge badge-warn' : 'badge badge-ok'}>
-              {cp.remaining > 0 ? t('cp.remaining', { count: cp.remaining }) : t('cp.enough')}
-            </span>
-          </div>
-          <ProgressBar value={percentDone} height={10} />
-          {pendingIds.length > 0 && (
-            <p className="small muted" style={{ marginBottom: 0, marginTop: 8 }}>
-              ⏳ {t('cp.checkingCount', { count: pendingIds.length })}
-            </p>
-          )}
         </div>
 
         {cp.angles && cp.angles.length > 0 && (
           <div className="shot-guide">
-            <h3>📸 {t('cp.how')}</h3>
+            <h3><Icon name="camera" size={16} /> {t('cp.how')}</h3>
             <ul className="angle-list">
               {cp.angles.map((angle, index) => (
                 <li key={`${angle.label}-${index}`}>

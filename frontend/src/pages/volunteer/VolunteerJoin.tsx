@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../auth'
 import { ErrorBox, LanguageSwitcher } from '../../components/common'
+import { BrandMark } from '../../components/Icon'
 import { useI18n } from '../../i18n'
 
 export default function VolunteerJoin() {
@@ -25,11 +26,11 @@ export default function VolunteerJoin() {
     catch (err) { setError(err) } finally { setBusy(false) }
   }
   return <div className="auth-page"><div className="auth-card">
-    <div className="row" style={{justifyContent: 'space-between', alignItems: 'center'}}>
-      <Link to="/">{t('common.backHome')}</Link>
+    <div className="row between" style={{alignItems: 'center', marginBottom: 20}}>
+      <Link to="/" className="auth-brand" style={{marginBottom: 0}}><BrandMark size={26} />{t('app.name')}</Link>
       <LanguageSwitcher compact />
     </div>
-    <h1 style={{marginTop: 20}}>{register ? t('volunteer.join.registerTitle') : t('volunteer.join.loginTitle')}</h1>
+    <h1 style={{marginTop: 0}}>{register ? t('volunteer.join.registerTitle') : t('volunteer.join.loginTitle')}</h1>
     <p className="sub">{register ? t('volunteer.join.registerSub') : t('volunteer.join.loginSub')}</p>
     <form onSubmit={submit}>
       <label className="field"><span>{t('volunteer.join.username')}</span><input required type="text" maxLength={64} autoComplete="username" value={username} onChange={e => setUsername(e.target.value)} /></label>

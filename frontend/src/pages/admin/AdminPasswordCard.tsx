@@ -55,7 +55,7 @@ export default function AdminPasswordCard() {
         {t('admin.system.pw.admin')}：{session?.nickname ?? '—'}
         {session?.admin_id ? `（${String(session.admin_id).padStart(3, '0')}）` : ''}
       </p>
-      <form onSubmit={submit}>
+      <form onSubmit={submit} className="narrow-form">
         <label className="field">
           <span>{t('admin.system.pw.current')}</span>
           <input

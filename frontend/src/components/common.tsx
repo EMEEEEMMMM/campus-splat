@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { ApiError } from '../api'
 import { LANGUAGES, useI18n, type Lang } from '../i18n'
+import { Icon } from './Icon'
 import type { CheckpointStatus, PhotoStatus } from '../types'
 
 // ---------------------------------------------------------------- formatting
@@ -125,7 +126,7 @@ export function ProgressBar({
   height = 8,
 }: {
   value: number
-  tone?: 'ok' | 'warn' | 'bad'
+  tone?: 'ok' | 'warn' | 'bad' | 'brand'
   height?: number
 }) {
   const clamped = Math.max(0, Math.min(100, value))
@@ -270,7 +271,7 @@ export function Modal({
         <header className="modal-head">
           <h3>{title}</h3>
           <button type="button" className="btn btn-ghost sm" onClick={onClose} aria-label="close">
-            ✕
+            <Icon name="close" size={14} />
           </button>
         </header>
         <div className="modal-body">{children}</div>
